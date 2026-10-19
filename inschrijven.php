@@ -46,4 +46,5 @@ $headers = "From: website@bvgaasperdam.nl\r\n"
 
 $gelukt = mail($ontvanger, "Inschrijving: $voornaam $achternaam", $tekst, $headers);
 
-header('Location: ' . ($gelukt ? 'bedankt.html' : 'lid-worden.html?fout=1#inschrijven'));
+$map = (($_POST['taal'] ?? '') === 'en') ? 'en/' : '';
+header('Location: ' . $map . ($gelukt ? 'bedankt.html' : 'lid-worden.html?fout=1#inschrijven'));

@@ -25,7 +25,9 @@ De site bestaat uit gewone HTML-bestanden, zonder WordPress en zonder database. 
 | `assets/style.css` | Kleuren, lettertypes en opmaak van de hele site |
 | `assets/site.js` | Het menu op de telefoon |
 
-Het menu, de kop en de voettekst staan op elke pagina. Pas je het menu aan, doe dat dan in alle HTML-bestanden.
+De Engelse versie staat in de map `en/`, met dezelfde bestandsnamen (bijvoorbeeld `en/spelen.html`). Rechtsboven wissel je met NL/EN tussen de twee. **Pas je iets aan op een Nederlandse pagina, pas dan ook de Engelse pagina in `en/` aan.** `welcome.html` stuurt oude links door naar `en/index.html`.
+
+Het menu, de kop en de voettekst staan op elke pagina. Pas je het menu aan, doe dat dan in alle HTML-bestanden, ook die in `en/`.
 
 ## Veelvoorkomende aanpassingen
 
