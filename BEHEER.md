@@ -22,7 +22,7 @@ De site bestaat uit gewone HTML-bestanden, zonder WordPress en zonder database. 
 | `welcome.html` | Engelse pagina |
 | `bedankt.html` | Bevestiging na het inschrijfformulier |
 | `inschrijven.php` | Mailt het inschrijfformulier naar de ledenadministratie (werkt alleen op de webhosting) |
-| `assets/style.css` | Kleuren, lettertypes en opmaak van de hele site |
+| `assets/style.css` | Kleuren, lettertypes en opmaak van de hele site. Verhoog na een wijziging het nummer in `style.css?v=…` op alle pagina's, anders zien bezoekers de oude opmaak uit hun browsergeheugen. |
 | `assets/site.js` | Het menu op de telefoon |
 
 De Engelse versie staat in de map `en/`, met dezelfde bestandsnamen (bijvoorbeeld `en/spelen.html`). Rechtsboven wissel je met NL/EN tussen de twee. **Pas je iets aan op een Nederlandse pagina, pas dan ook de Engelse pagina in `en/` aan.** `welcome.html` stuurt oude links door naar `en/index.html`.
