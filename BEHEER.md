@@ -31,6 +31,7 @@ Het menu, de kop en de voettekst staan op elke pagina. Pas je het menu aan, doe 
 - **Nieuw seizoen:** werk op `competitie.html` de teams en links naar toernooi.nl bij en pas het seizoen in de kop aan.
 - **Contributie:** pas de tabel op `lid-worden.html` aan, met de datum van de ALV.
 - **Bestuur:** pas de tabel op `vereniging.html` aan.
+- **Links naar andere websites** openen in een nieuw venster: geef ze `target="_blank" rel="noopener"` mee.
 
 ## Testversie en echte site
 
