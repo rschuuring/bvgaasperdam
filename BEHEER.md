@@ -19,7 +19,7 @@ De site bestaat uit gewone HTML-bestanden, zonder WordPress en zonder database. 
 | `sponsorkliks.html` | SponsorKliks-webwinkels (ingebouwd van sponsorkliks.com) en BeeS-Sport |
 | `gedrag.html` | Wat te doen bij grensoverschrijdend gedrag, vertrouwenspersoon |
 | `contact.html` | E-mailadressen per onderwerp |
-| `welcome.html` | Engelse pagina |
+| `welcome.html` | Stuurt de oude Engelse link door naar `en/index.html` |
 | `bedankt.html` | Bevestiging na het inschrijfformulier |
 | `inschrijven.php` | Mailt het inschrijfformulier naar de ledenadministratie (werkt alleen op de webhosting) |
 | `assets/style.css` | Kleuren, lettertypes en opmaak van de hele site. Verhoog na een wijziging het nummer in `style.css?v=…` op alle pagina's, anders zien bezoekers de oude opmaak uit hun browsergeheugen. |
@@ -32,7 +32,7 @@ Het menu, de kop en de voettekst staan op elke pagina. Pas je het menu aan, doe 
 ## Veelvoorkomende aanpassingen
 
 - **Nieuwsbericht toevoegen:** zet een nieuw `<article>` bovenaan in `nieuws.html`, en vervang op `index.html` het oudste van de twee berichten onder "Laatste nieuws".
-- **Speeltijden wijzigen:** het schema staat op `index.html` en `spelen.html` (en in het Engels op `welcome.html`). Pas alle drie aan.
+- **Speeltijden wijzigen:** het schema staat op `index.html` en `spelen.html`, en in het Engels op `en/index.html` en `en/spelen.html`. Pas alle vier aan.
 - **Nieuw seizoen:** werk op `competitie.html` de teams en links naar toernooi.nl bij en pas het seizoen in de kop aan.
 - **Contributie:** pas de tabel op `lid-worden.html` aan, met de datum van de ALV.
 - **Bestuur:** pas de tabel op `vereniging.html` aan.
@@ -48,9 +48,10 @@ Zolang dit een testversie is, staat op elke pagina `<meta name="robots" content=
 ## Live zetten op de webhosting
 
 1. Maak een back-up van de oude WordPress-site via het hostingpaneel.
-2. Upload alle bestanden uit deze repository (behalve `BEHEER.md` en `README.md`) naar de webmap van bvgaasperdam.nl, meestal `public_html`.
+2. Upload alle bestanden en mappen uit deze repository, ook `en/` en `assets/` (behalve `BEHEER.md` en `README.md`), naar de webmap van bvgaasperdam.nl, meestal `public_html`.
 3. Haal de noindex-regel en `robots.txt` weg (zie hierboven).
 4. Test het inschrijfformulier één keer en controleer of de mail bij de ledenadministratie aankomt.
+5. Zet doorverwijzingen van oude WordPress-adressen (zoals `/teamindeling/` en `/contact-2/`) naar de nieuwe pagina's, zodat oude links en zoekresultaten blijven werken.
 
 ## Afspraken en keuzes
 
