@@ -53,7 +53,7 @@ Zolang dit een testversie is, staat op elke pagina `<meta name="robots" content=
 ## Afspraken en keuzes
 
 - Oktober 2026: de oude WordPress-site (PHP 7.4, verouderde plugins) is vervangen door deze eenvoudige site, zodat er geen onderhoud aan WordPress meer nodig is.
-- Kleuren: de clubkleuren, groen (#136153) uit het logo en blauw (#3b8dbd) van de oude kopbalk. Het logo (`assets/logo.png`) is uit een screenshot geknipt; vervang het door het originele bestand als dat er is.
+- Kleuren: de clubkleuren, groen (#136153) uit het logo en blauw (#3b8dbd) van de oude kopbalk. Logo's: `assets/logo.png` (150x150, van de oude site) en `assets/bees-sport.png`. Een groter of vectorbestand van het clublogo maakt de homepage scherper.
 - Oude nieuwsberichten van de WordPress-site (2010–2022) zijn niet overgenomen.
 
 ## Toegang
