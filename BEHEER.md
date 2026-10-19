@@ -16,6 +16,7 @@ De site bestaat uit gewone HTML-bestanden, zonder WordPress en zonder database. 
 | `nieuws.html` | Alle nieuwsberichten, nieuwste bovenaan |
 | `vereniging.html` | Bestuur, gedragsregels, privacy, sponsors |
 | `privacy.html` | Privacyverklaring |
+| `sponsorkliks.html` | SponsorKliks-webwinkels (ingebouwd van sponsorkliks.com) en BeeS-Sport |
 | `gedrag.html` | Wat te doen bij grensoverschrijdend gedrag, vertrouwenspersoon |
 | `contact.html` | E-mailadressen per onderwerp |
 | `welcome.html` | Engelse pagina |
