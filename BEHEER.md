@@ -15,6 +15,7 @@ De site bestaat uit gewone HTML-bestanden, zonder WordPress en zonder database. 
 | `jeugd.html` | Jeugdtraining, aanmelden, jeugdfonds |
 | `nieuws.html` | Alle nieuwsberichten, nieuwste bovenaan |
 | `vereniging.html` | Bestuur, gedragsregels, privacy, sponsors |
+| `privacy.html` | Privacyverklaring |
 | `gedrag.html` | Wat te doen bij grensoverschrijdend gedrag, vertrouwenspersoon |
 | `contact.html` | E-mailadressen per onderwerp |
 | `welcome.html` | Engelse pagina |
