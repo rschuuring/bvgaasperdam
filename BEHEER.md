@@ -49,7 +49,7 @@ Zolang dit een testversie is, staat op elke pagina `<meta name="robots" content=
 ## Afspraken en keuzes
 
 - Oktober 2026: de oude WordPress-site (PHP 7.4, verouderde plugins) is vervangen door deze eenvoudige site, zodat er geen onderhoud aan WordPress meer nodig is.
-- Kleuren: donkergroen van de sporthalvloer met geel van een nylon shuttle.
+- Kleuren: de clubkleuren, groen (#136153) uit het logo en blauw (#3b8dbd) van de oude kopbalk. Het logo (`assets/logo.png`) is uit een screenshot geknipt; vervang het door het originele bestand als dat er is.
 - Oude nieuwsberichten van de WordPress-site (2010–2022) zijn niet overgenomen.
 
 ## Toegang
