@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lid worden | BV Gaasperdam</title>
+<meta name="description" content="Contributie van BV Gaasperdam en het inschrijfformulier.">
+<!-- TESTVERSIE: verwijder de regel hieronder zodra de site live gaat op bvgaasperdam.nl -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#inhoud">Naar de inhoud</a>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="index.html">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="31" r="7" fill="var(--shuttle)"/><path d="M14 29 L8 6 L20 12 L32 6 L26 29 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M20 12 V28 M14 9 L17 28 M26 9 L23 28" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span><b>BV Gaasperdam</b><small>Badminton in Amsterdam Zuidoost</small></span>
+    </a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav" aria-label="Hoofdmenu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="spelen.html">Spelen</a></li>
+        <li><a href="lid-worden.html" aria-current="page">Lid worden</a></li>
+        <li><a href="competitie.html">Competitie</a></li>
+        <li><a href="jeugd.html">Jeugd</a></li>
+        <li><a href="nieuws.html">Nieuws</a></li>
+        <li><a href="vereniging.html">Vereniging</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inhoud">
+<section class="page wrap stack">
+  <div class="stack tight"><span class="eyebrow">Lid worden</span><h1 class="h2">Contributie en inschrijven</h1></div>
+  <p>Bedragen per half jaar, vastgesteld door de ALV van 2 april 2026. De contributie wordt op 1 april en 1 oktober geïncasseerd.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Lidmaatschap</th><th class="num">Per half jaar</th></tr></thead>
+    <tbody>
+      <tr><td>Jeugd t/m 10 jaar</td><td class="num">€ 62,50</td></tr>
+      <tr><td>Jeugd vanaf 11 jaar</td><td class="num">€ 85,50</td></tr>
+      <tr><td>Jeugdcompetitie t/m 16 jaar, nylon shuttles</td><td class="num">€ 97,50</td></tr>
+      <tr><td>Jeugdcompetitie t/m 16 jaar, veren shuttles</td><td class="num">€ 120,00</td></tr>
+      <tr><td>Senior recreant, nylon shuttles</td><td class="num">€ 95,00</td></tr>
+      <tr><td>Senior competitie, nylon shuttles</td><td class="num">€ 125,00</td></tr>
+      <tr><td>Senior competitie, veren shuttles, vaste teamspeler</td><td class="num">€ 210,00</td></tr>
+      <tr><td>Senior competitie, veren shuttles, invaller</td><td class="num">€ 177,50</td></tr>
+      <tr><td>Niet-spelend lid bij blessure (na 3 maanden)</td><td class="num">€ 30,00</td></tr>
+      <tr><td>Opnieuw lid binnen 1 jaar na opzeggen</td><td class="num">€ 30,00</td></tr>
+      <tr><td>Inschrijfgeld (eenmalig)</td><td class="num">€ 10,00</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid">
+    <div class="panel"><h3>Opzeggen</h3><p>Opzeggen kan per half jaar, schriftelijk per mail aan de ledenadministratie, uiterlijk 1 maart of 1 september. De opzegging geldt pas na bevestiging.</p></div>
+    <div class="panel"><h3>Blessure</h3><p>De eerste 3 maanden van een blessure zijn voor eigen rekening, gerekend vanaf je melding per mail. Daarna betaal je € 30 per half jaar als niet-spelend lid. Meld je herstel, dan speel je weer mee.</p></div>
+  </div>
+  <div class="panel" id="inschrijven">
+    <h2 class="h3">Inschrijfformulier</h2>
+    <form id="signup" method="post" action="inschrijven.php">
+      <div class="row2">
+        <label for="f-voornaam">Voornaam<input id="f-voornaam" name="voornaam" required autocomplete="given-name"></label>
+        <label for="f-achternaam">Achternaam<input id="f-achternaam" name="achternaam" required autocomplete="family-name"></label>
+      </div>
+      <div class="row2">
+        <label for="f-email">E-mail<input id="f-email" name="email" type="email" required autocomplete="email"></label>
+        <label for="f-geboorte">Geboortedatum<input id="f-geboorte" name="geboortedatum" type="date" required></label>
+      </div>
+      <label for="f-soort">Soort lidmaatschap
+        <select id="f-soort" name="lidmaatschap" required>
+          <option value="">Kies…</option>
+          <option>Jeugd</option><option>Senior recreant</option><option>Senior competitie</option>
+        </select>
+      </label>
+      <label for="f-opm">Opmerking (optioneel)<textarea id="f-opm" name="opmerking" rows="3"></textarea></label>
+      <label class="check"><input type="checkbox" name="akkoord" required> Ik ga akkoord met de <a href="vereniging.html#privacy">privacyverklaring</a>.</label>
+      <label class="hp" aria-hidden="true">Laat dit veld leeg<input name="website" tabindex="-1" autocomplete="off"></label>
+      <button class="btn dark" type="submit">Inschrijving versturen</button>
+      <div id="signup-demo" class="ok" hidden>Dit is de testversie van de website, er is niets verstuurd. Mail je inschrijving voorlopig naar <a href="mailto:ledenadministratie@bvgaasperdam.nl">ledenadministratie@bvgaasperdam.nl</a>.</div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b class="foot-name">BV Gaasperdam</b><p>Sporthal Gaasperdam<br>Ravenswaaipad 5, Amsterdam Zuidoost</p></div>
+    <div><p><a href="spelen.html">Speeltijden</a> · <a href="lid-worden.html">Lid worden</a> · <a href="contact.html">Contact</a></p>
+      <p><a href="https://nl-nl.facebook.com/pages/category/Neighborhood/BV-Gaasperdam-112443158875255/">Facebook</a> · <a href="welcome.html" lang="en">English</a></p></div>
+    <div><p>© 2026 Badminton Vereniging Gaasperdam</p><p><a href="vereniging.html#privacy">Privacy</a></p></div>
+  </div>
+</footer>
+</body>
+</html>
