@@ -10,7 +10,7 @@ De site bestaat uit gewone HTML-bestanden, zonder WordPress en zonder database. 
 | --- | --- |
 | `index.html` | Homepage: welkom, speelschema, laatste nieuws, locatie |
 | `spelen.html` | Speeltijden, proefspelen, wat neem je mee |
-| `lid-worden.html` | Contributietabel, opzeggen, blessures, inschrijfformulier |
+| `lid-worden.html` | Contributietabel, inschrijven (per mail), opzeggen, blessures |
 | `competitie.html` | Teams van dit seizoen met links naar uitslagen en standen |
 | `jeugd.html` | Jeugdtraining, aanmelden, jeugdfonds |
 | `nieuws.html` | Alle nieuwsberichten, nieuwste bovenaan |
@@ -20,7 +20,7 @@ De site bestaat uit gewone HTML-bestanden, zonder WordPress en zonder database. 
 | `gedrag.html` | Wat te doen bij grensoverschrijdend gedrag, vertrouwenspersoon |
 | `contact.html` | E-mailadressen per onderwerp |
 | `welcome.html` | Stuurt de oude Engelse link door naar `en/index.html` |
-| `bedankt.html` | Bevestiging na het inschrijfformulier |
+| `bedankt.html` | Bevestiging na het inschrijfformulier (formulier staat nu niet op de site, zie hieronder) |
 | `inschrijven.php` | Mailt het inschrijfformulier naar de ledenadministratie (werkt alleen op de webhosting) |
 | `assets/style.css` | Kleuren, lettertypes en opmaak van de hele site. Verhoog na een wijziging het nummer in `style.css?v=…` op alle pagina's, anders zien bezoekers de oude opmaak uit hun browsergeheugen. |
 | `assets/site.js` | Het menu op de telefoon |
@@ -50,13 +50,14 @@ Zolang dit een testversie is, staat op elke pagina `<meta name="robots" content=
 1. Maak een back-up van de oude WordPress-site via het hostingpaneel.
 2. Upload alle bestanden en mappen uit deze repository, ook `en/` en `assets/` (behalve `BEHEER.md` en `README.md`), naar de webmap van bvgaasperdam.nl, meestal `public_html`.
 3. Haal de noindex-regel en `robots.txt` weg (zie hierboven).
-4. Test het inschrijfformulier één keer en controleer of de mail bij de ledenadministratie aankomt.
+4. Staat het inschrijfformulier weer op de site? Test het dan één keer en controleer of de mail bij de ledenadministratie aankomt.
 5. Zet doorverwijzingen van oude WordPress-adressen (zoals `/teamindeling/` en `/contact-2/`) naar de nieuwe pagina's, zodat oude links en zoekresultaten blijven werken.
 
 ## Afspraken en keuzes
 
 - Oktober 2026: de oude WordPress-site (PHP 7.4, verouderde plugins) is vervangen door deze eenvoudige site, zodat er geen onderhoud aan WordPress meer nodig is.
 - Kleuren: clubgroen (#136153) uit het logo, donkergroen (#0d4a3f) voor de kopbalk en mint (#a7dcc0) voor knoppen en labels. Gekozen door Robert in oktober 2026 (blauw paste niet goed bij het groen). Logo's: `assets/logo.png` (150x150, van de oude site) en `assets/bees-sport.png`. Een groter of vectorbestand van het clublogo maakt de homepage scherper.
+- Oktober 2026: het inschrijfformulier is van `lid-worden.html` (en `en/lid-worden.html`) gehaald tot het bestuur weet welke gegevens erin moeten. Nieuwe leden mailen naar ledenadministratie@bvgaasperdam.nl. `inschrijven.php` en `bedankt.html` blijven bewaard; het oude formulier staat in de git-geschiedenis (commit c85addc) en kan daaruit terug worden gezet.
 - Oude nieuwsberichten van de WordPress-site (2010–2022) zijn niet overgenomen.
 
 ## Toegang
