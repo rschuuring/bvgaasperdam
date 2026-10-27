@@ -186,3 +186,39 @@ nav a{padding:10px 9px}
 }
 header .wrap{max-width:1240px}
 @media (min-width:1181px){nav{flex:none} nav ul{flex-wrap:nowrap}}
+
+/* Teamindeling op competitie.html */
+.teams{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.team{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;min-width:0}
+.team h3{background:var(--court);color:var(--court-ink);padding:10px 14px;font-size:21px;text-transform:uppercase;display:grid;gap:2px}
+.team h3 small{font:700 12px/1.2 var(--body);letter-spacing:.08em;opacity:.8}
+.team ul{list-style:none;margin:0;padding:6px 0}
+.team li{padding:6px 14px}
+.team li+li{border-top:1px solid var(--line)}
+
+/* Inschrijfformulier op lid-worden.html */
+.signup-panel form{max-width:640px}
+.fields{display:grid;gap:14px}
+.fields[hidden],[hidden]{display:none !important}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:8px;min-width:0}
+legend{font-weight:600;padding:0;margin-bottom:6px}
+fieldset.inline{display:flex;flex-wrap:wrap;gap:6px 18px;align-content:start}
+fieldset.inline legend{width:100%}
+fieldset.soort{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+fieldset.soort legend{grid-column:1/-1;font:800 22px/1.1 var(--display);text-transform:uppercase}
+label.opt{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer;background:var(--floor)}
+label.opt input{width:auto;margin-top:5px;accent-color:var(--court)}
+label.opt span{display:grid;gap:2px}
+label.opt small{font-weight:400;color:var(--muted);font-size:14px;line-height:1.3}
+label.opt:has(input:checked){border-color:var(--court);background:var(--surface);box-shadow:inset 0 0 0 1px var(--court)}
+input[type=radio],input[type=checkbox]{accent-color:var(--court)}
+.prefix{display:flex;align-items:center;gap:8px}
+.prefix span{font-family:ui-monospace,Menlo,Consolas,monospace;white-space:nowrap}
+.sign{display:grid;gap:6px}
+.sign-label{font-weight:600}
+.sign-label small{font-weight:400;color:var(--muted)}
+#sign-pad{width:100%;max-width:560px;aspect-ratio:560/160;height:auto;background:#fff;border:1px dashed var(--muted);border-radius:8px;touch-action:none;cursor:crosshair}
+.link-btn{background:none;border:0;padding:0;font:inherit;color:var(--link);text-decoration:underline;cursor:pointer;justify-self:start;text-align:left}
+.btn.outline{background:transparent;border-color:var(--court);color:var(--link)}
+.err{color:#b3261e;font-weight:600;margin:0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .err{color:#ffb4ab}}

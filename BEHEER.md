@@ -10,8 +10,8 @@ De site bestaat uit gewone HTML-bestanden, zonder WordPress en zonder database. 
 | --- | --- |
 | `index.html` | Homepage: welkom, speelschema, laatste nieuws, locatie |
 | `spelen.html` | Speeltijden, proefspelen, wat neem je mee |
-| `lid-worden.html` | Contributietabel, inschrijven (per mail), opzeggen, blessures |
-| `competitie.html` | Teams van dit seizoen met links naar uitslagen en standen |
+| `lid-worden.html` | Contributietabel, opzeggen, blessures, inschrijfformulier |
+| `competitie.html` | Teamindeling van dit seizoen en links naar uitslagen en standen |
 | `jeugd.html` | Jeugdtraining, aanmelden, jeugdfonds |
 | `nieuws.html` | Alle nieuwsberichten, nieuwste bovenaan |
 | `vereniging.html` | Bestuur, gedragsregels, privacy, sponsors |
@@ -20,8 +20,10 @@ De site bestaat uit gewone HTML-bestanden, zonder WordPress en zonder database. 
 | `gedrag.html` | Wat te doen bij grensoverschrijdend gedrag, vertrouwenspersoon |
 | `contact.html` | E-mailadressen per onderwerp |
 | `welcome.html` | Stuurt de oude Engelse link door naar `en/index.html` |
-| `bedankt.html` | Bevestiging na het inschrijfformulier (formulier staat nu niet op de site, zie hieronder) |
-| `inschrijven.php` | Mailt het inschrijfformulier naar de ledenadministratie (werkt alleen op de webhosting) |
+| `bedankt.html` | Bevestiging na het inschrijfformulier (alleen als JavaScript uit staat) |
+| `inschrijven.php` | Mailt het inschrijfformulier met de PDF als bijlage naar de ledenadministratie (werkt alleen op de webhosting) |
+| `assets/inschrijven.js` | Het inschrijfformulier: velden per soort (recreant, competitie, jeugd), handtekening, PDF maken en versturen |
+| `assets/jspdf.umd.min.js` | Bibliotheek die de PDF maakt (jsPDF 2.5.1, MIT-licentie). Niet aanpassen. |
 | `assets/style.css` | Kleuren, lettertypes en opmaak van de hele site. Verhoog na een wijziging het nummer in `style.css?v=…` op alle pagina's, anders zien bezoekers de oude opmaak uit hun browsergeheugen. |
 | `assets/site.js` | Het menu op de telefoon |
 
@@ -33,7 +35,7 @@ Het menu, de kop en de voettekst staan op elke pagina. Pas je het menu aan, doe 
 
 - **Nieuwsbericht toevoegen:** zet een nieuw `<article>` bovenaan in `nieuws.html`, en vervang op `index.html` het oudste van de twee berichten onder "Laatste nieuws".
 - **Speeltijden wijzigen:** het schema staat op `index.html` en `spelen.html`, en in het Engels op `en/index.html` en `en/spelen.html`. Pas alle vier aan.
-- **Nieuw seizoen:** werk op `competitie.html` de teams en links naar toernooi.nl bij en pas het seizoen in de kop aan.
+- **Nieuw seizoen:** werk op `competitie.html` de teamindeling (één `<div class="team">` per team), de links naar toernooi.nl en het seizoen in de kop bij. Pas ook de teamkeuze in het inschrijfformulier aan (`<select name="team">` op `lid-worden.html`).
 - **Contributie:** pas de tabel op `lid-worden.html` aan, met de datum van de ALV.
 - **Bestuur:** pas de tabel op `vereniging.html` aan.
 - **Links naar andere websites** openen in een nieuw venster: geef ze `target="_blank" rel="noopener"` mee.
@@ -50,14 +52,14 @@ Zolang dit een testversie is, staat op elke pagina `<meta name="robots" content=
 1. Maak een back-up van de oude WordPress-site via het hostingpaneel.
 2. Upload alle bestanden en mappen uit deze repository, ook `en/` en `assets/` (behalve `BEHEER.md` en `README.md`), naar de webmap van bvgaasperdam.nl, meestal `public_html`.
 3. Haal de noindex-regel en `robots.txt` weg (zie hierboven).
-4. Staat het inschrijfformulier weer op de site? Test het dan één keer en controleer of de mail bij de ledenadministratie aankomt.
+4. Test het inschrijfformulier één keer en controleer of de mail met de PDF-bijlage bij de ledenadministratie aankomt.
 5. Zet doorverwijzingen van oude WordPress-adressen (zoals `/teamindeling/` en `/contact-2/`) naar de nieuwe pagina's, zodat oude links en zoekresultaten blijven werken.
 
 ## Afspraken en keuzes
 
 - Oktober 2026: de oude WordPress-site (PHP 7.4, verouderde plugins) is vervangen door deze eenvoudige site, zodat er geen onderhoud aan WordPress meer nodig is.
 - Kleuren: clubgroen (#136153) uit het logo, donkergroen (#0d4a3f) voor de kopbalk en mint (#a7dcc0) voor knoppen en labels. Gekozen door Robert in oktober 2026 (blauw paste niet goed bij het groen). Logo's: `assets/logo.png` (150x150, van de oude site) en `assets/bees-sport.png`. Een groter of vectorbestand van het clublogo maakt de homepage scherper.
-- Oktober 2026: het inschrijfformulier is van `lid-worden.html` (en `en/lid-worden.html`) gehaald tot het bestuur weet welke gegevens erin moeten. Nieuwe leden mailen naar ledenadministratie@bvgaasperdam.nl. `inschrijven.php` en `bedankt.html` blijven bewaard; het oude formulier staat in de git-geschiedenis (commit c85addc) en kan daaruit terug worden gezet.
+- Oktober 2026: het inschrijfformulier volgt de drie papieren formulieren van het bestuur (recreanten, competitie, jeugd) in één formulier: je kiest bovenaan de soort en krijgt de juiste velden. Online invullen en tekenen, als PDF downloaden, of een leeg formulier printen. De ledenadministratie krijgt een mail met de gegevens en het ondertekende formulier als PDF. De PDF is altijd in het Nederlands.
 - Oude nieuwsberichten van de WordPress-site (2010–2022) zijn niet overgenomen.
 
 ## Toegang

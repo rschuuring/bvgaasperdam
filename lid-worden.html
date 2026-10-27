@@ -11,9 +11,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/style.css?v=4">
 <link rel="alternate" hreflang="en" href="en/lid-worden.html">
-<script src="assets/site.js?v=3" defer></script>
+<script src="assets/site.js?v=4" defer></script>
+<script src="assets/jspdf.umd.min.js" defer></script>
+<script src="assets/inschrijven.js?v=1" defer></script>
 </head>
 <body>
 <a class="skip" href="#inhoud">Naar de inhoud</a>
@@ -61,10 +63,108 @@
     </tbody>
   </table></div>
   <h2 id="opzeggen">Inschrijven en opzeggen</h2>
-  <p>Je kunt twee keer gratis mee komen trainen. Wanneer je besluit om lid te worden, mail je je inschrijving naar <a class="mail" href="mailto:ledenadministratie@bvgaasperdam.nl">ledenadministratie@bvgaasperdam.nl</a>. Daarna ontvang je een bevestiging van de ledenadministratie.</p>
+  <p>Je kunt twee keer gratis mee komen trainen. Wanneer je besluit om lid te worden, schrijf je je in via het <a href="#inschrijven">inschrijfformulier</a> onderaan deze pagina. Daarna ontvang je een bevestiging van de ledenadministratie.</p>
   <p>Een eventuele opzegging geldt uitsluitend per half jaar en dient uitsluitend schriftelijk te geschieden, uitsluitend per mail op <a class="mail" href="mailto:ledenadministratie@bvgaasperdam.nl">ledenadministratie@bvgaasperdam.nl</a> en wel tenminste één maand van tevoren (dus uiterlijk vóór 1 maart en vóór 1 september). Een opzegging is pas geldig als hiervan een schriftelijke reactie is terug ontvangen van de ledenadministratie. Opgezegd en binnen 1 jaar weer opnieuw inschrijven? Daar wordt € 30,00 inschrijfgeld voor gerekend in verband met de administratiekosten.</p>
   <h2 id="blessures">Blessures</h2>
   <p>Voor blessures geldt binnen onze vereniging een wachttermijn van 3 maanden. Dat wil zeggen: de eerste 3 maanden is een blessure voor eigen rekening. Na die 3 maanden betaal je als niet-spelend lid € 30,00 per half jaar. Dit bedrag wordt achteraf verrekend met het nieuwe contributiebedrag in de volgende contributieronde (met andere woorden: geen tussentijdse verrekening of restitutie). De wachttijd van 3 maanden gaat in op het moment dat de blessure is gemeld per mail via <a class="mail" href="mailto:ledenadministratie@bvgaasperdam.nl">ledenadministratie@bvgaasperdam.nl</a>. Pas nadat het herstel weer is gemeld bij de ledenadministratie, kan weer worden deelgenomen aan badmintonactiviteiten.</p>
+  <div class="panel signup-panel" id="inschrijven">
+    <h2 class="h3">Inschrijfformulier</h2>
+    <p>Vul het formulier online in en verstuur het. Je kunt het ook als PDF downloaden, of een leeg formulier printen en op papier invullen.</p>
+    <form id="signup" method="post" action="inschrijven.php" novalidate>
+      <input type="hidden" name="taal" value="nl">
+      <input type="hidden" name="pdf" value="">
+      <fieldset class="soort">
+        <legend>Waarvoor schrijf je je in?</legend>
+        <label class="opt"><input type="radio" name="soort" value="recreant" required><span><b>Recreant</b><small>Vrij spelen op dinsdag of woensdag</small></span></label>
+        <label class="opt"><input type="radio" name="soort" value="competitie"><span><b>Competitie</b><small>Spelen in een competitieteam</small></span></label>
+        <label class="opt"><input type="radio" name="soort" value="jeugd"><span><b>Jeugd</b><small>Jeugdtraining op dinsdag</small></span></label>
+      </fieldset>
+
+      <div class="fields" hidden>
+        <p class="ok" data-voor="jeugd"><b>Ledenstop:</b> de jeugdgroep zit op dit moment vol. Je kunt je wel inschrijven, dan nemen we contact op zodra er plek is. Vragen? Mail naar <a href="mailto:jeugd@bvgaasperdam.nl">jeugd@bvgaasperdam.nl</a>.</p>
+
+        <div class="row2">
+          <label>Voornaam<input name="voornaam" required autocomplete="given-name"></label>
+          <label>Achternaam<input name="achternaam" required autocomplete="family-name"></label>
+        </div>
+        <div class="row2">
+          <label>Geboortedatum<input name="geboortedatum" type="date" required autocomplete="bday"></label>
+          <fieldset class="inline" data-voor="recreant competitie"><legend>Geslacht</legend>
+            <label class="check"><input type="radio" name="geslacht" value="man" required> Man</label>
+            <label class="check"><input type="radio" name="geslacht" value="vrouw"> Vrouw</label>
+          </fieldset>
+          <fieldset class="inline" data-voor="jeugd"><legend>Geslacht</legend>
+            <label class="check"><input type="radio" name="geslacht" value="jongen" required> Jongen</label>
+            <label class="check"><input type="radio" name="geslacht" value="meisje"> Meisje</label>
+          </fieldset>
+        </div>
+        <label>Straat en huisnummer<input name="adres" required autocomplete="street-address"></label>
+        <div class="row2">
+          <label>Postcode<input name="postcode" required autocomplete="postal-code"></label>
+          <label>Woonplaats<input name="woonplaats" required autocomplete="address-level2"></label>
+        </div>
+        <div class="row2">
+          <label>E-mail<input name="email" type="email" required autocomplete="email"></label>
+          <label>Telefoon<input name="telefoon" type="tel" required autocomplete="tel"></label>
+        </div>
+        <label data-voor="jeugd">Telefoonnummer ouder of verzorger<input name="telefoon_ouder" type="tel" required></label>
+
+        <fieldset data-voor="recreant"><legend>Voorkeur speelavond</legend>
+          <label class="check"><input type="checkbox" name="speelavond[]" value="Dinsdag 19.30 - 21.30"> Dinsdag 19:30–21:30</label>
+          <label class="check"><input type="checkbox" name="speelavond[]" value="Woensdag 19.00 - 21.00"> Woensdag 19:00–21:00</label>
+          <label class="check"><input type="checkbox" name="speelavond[]" value="Woensdag 21.00 - 23.00"> Woensdag 21:00–23:00</label>
+        </fieldset>
+
+        <div class="row2" data-voor="competitie">
+          <label>Welk team
+            <select name="team" required>
+              <option value="">Kies…</option>
+              <option>BV Gaasperdam 1</option><option>BV Gaasperdam 2</option><option>BV Gaasperdam 3</option>
+              <option>BV Gaasperdam 4</option><option>BV Gaasperdam 5</option><option>BV Gaasperdam 6</option>
+              <option>BV Gaasperdam H1</option><option value="Invaller">Invaller</option>
+              <option value="Nog niet bekend">Nog niet bekend</option>
+            </select>
+          </label>
+          <label>Speelavond<input name="speelavond_comp" placeholder="bijv. dinsdag en donderdag"></label>
+        </div>
+
+        <fieldset data-voor="jeugd"><legend>Contributie</legend>
+          <label class="check"><input type="radio" name="betaling" value="iban" required> Betaal ik zelf (IBAN)</label>
+          <label class="check"><input type="radio" name="betaling" value="stadspas"> Via de Stadspas</label>
+        </fieldset>
+        <label data-iban>IBAN<input name="iban" required autocomplete="off" placeholder="NL00 BANK 0123 4567 89" spellcheck="false"></label>
+        <label data-stadspas>Stadspasnummer (de laatste 8 cijfers)
+          <span class="prefix"><span>6064 3660 110</span><input name="stadspas" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" required autocomplete="off"></span>
+        </label>
+        <p class="muted" data-stadspas>Heeft een ouder een Stadspas? Dan kunnen we de contributie via de Stadspas innen, als die niet al voor de contributie van een andere vereniging wordt gebruikt. Via de Stadspas kun je soms ook materiaal kopen (racket, schoenen, sportkleding). Meer weten? Mail naar <a href="mailto:jeugd@bvgaasperdam.nl">jeugd@bvgaasperdam.nl</a>.</p>
+
+        <label><span data-voor="recreant competitie">Datum van inschrijving</span><span data-voor="jeugd">Ingangsdatum lidmaatschap</span><input name="datum" type="date" required></label>
+        <label>Opmerking (optioneel)<textarea name="opmerking" rows="3"></textarea></label>
+
+        <label data-voor="jeugd">Naam ouder of verzorger<input name="naam_ouder" required></label>
+        <label class="check"><input type="checkbox" name="akkoord" value="ja" required> <span><span data-voor="jeugd">Ik verklaar als ouder of verzorger</span><span data-voor="recreant competitie">Ik verklaar</span> akkoord te zijn met de statuten, het huishoudelijk reglement en de <a href="privacy.html">privacyverklaring</a> van BV Gaasperdam. In het bijzonder ben ik op de hoogte van de regels voor opzeggen: minimaal een maand voor de halfjaarlijkse contributie-inning (altijd in april en oktober), door een e-mail te sturen naar ledenadministratie@bvgaasperdam.nl.</span></label>
+
+        <div class="sign">
+          <span class="sign-label"><span data-voor="recreant competitie">Handtekening</span><span data-voor="jeugd">Handtekening ouder of verzorger</span> <small>(teken met je muis of vinger)</small></span>
+          <canvas id="sign-pad" width="560" height="160" aria-label="Vak voor je handtekening"></canvas>
+          <button type="button" class="link-btn" id="sign-clear">Handtekening wissen</button>
+        </div>
+
+        <label class="hp" aria-hidden="true">Laat dit veld leeg<input name="website" tabindex="-1" autocomplete="off"></label>
+        <p class="err" id="signup-err" role="alert" hidden></p>
+        <div class="btns">
+          <button class="btn dark" type="submit">Inschrijving versturen</button>
+          <button class="btn outline" type="button" id="pdf-btn">Download als PDF</button>
+        </div>
+      </div>
+      <p class="muted"><button type="button" class="link-btn" id="blank-btn">Liever op papier? Print een leeg formulier (PDF).</button></p>
+      <div id="signup-done" class="ok" hidden>
+        <p><b>Bedankt, je inschrijving is verstuurd!</b> De ledenadministratie neemt zo snel mogelijk contact met je op.</p>
+        <button class="btn outline" type="button" id="pdf-done">Download je formulier als PDF</button>
+      </div>
+      <div id="signup-demo" class="ok" hidden>Dit is de testversie van de website, er is niets verstuurd. Je kunt het formulier wel als PDF downloaden.</div>
+    </form>
+  </div>
 </section>
 </main>
 

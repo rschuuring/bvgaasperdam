@@ -11,9 +11,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="../assets/style.css?v=3">
+<link rel="stylesheet" href="../assets/style.css?v=4">
 <link rel="alternate" hreflang="nl" href="../lid-worden.html">
-<script src="../assets/site.js?v=3" defer></script>
+<script src="../assets/site.js?v=4" defer></script>
+<script src="../assets/jspdf.umd.min.js" defer></script>
+<script src="../assets/inschrijven.js?v=1" defer></script>
 </head>
 <body>
 <a class="skip" href="#inhoud">Skip to content</a>
@@ -61,10 +63,108 @@
     </tbody>
   </table></div>
   <h2 id="opzeggen">Joining and cancelling</h2>
-  <p>You can join two training sessions for free. When you decide to become a member, email your registration to <a class="mail" href="mailto:ledenadministratie@bvgaasperdam.nl">ledenadministratie@bvgaasperdam.nl</a>. You will then receive a confirmation from the membership administration.</p>
+  <p>You can join two training sessions for free. When you decide to become a member, sign up with the <a href="#inschrijven">registration form</a> at the bottom of this page. You will then receive a confirmation from the membership administration.</p>
   <p>Membership can only be cancelled per half year, in writing, by email only to <a class="mail" href="mailto:ledenadministratie@bvgaasperdam.nl">ledenadministratie@bvgaasperdam.nl</a>, at least one month in advance (so before 1 March or before 1 September). A cancellation is only valid once the membership administration has confirmed it in writing. If you cancel and sign up again within 1 year, a registration fee of € 30.00 is charged for administration costs.</p>
   <h2 id="blessures">Injuries</h2>
   <p>For injuries our club has a waiting period of 3 months. This means the first 3 months of an injury are at your own expense. After those 3 months you pay € 30.00 per half year as a non-playing member. This amount is settled afterwards with the next fee payment (in other words: no refunds or adjustments in between). The 3-month waiting period starts when the injury has been reported by email to <a class="mail" href="mailto:ledenadministratie@bvgaasperdam.nl">ledenadministratie@bvgaasperdam.nl</a>. You can take part in badminton activities again only after reporting your recovery to the membership administration.</p>
+  <div class="panel signup-panel" id="inschrijven">
+    <h2 class="h3">Registration form</h2>
+    <p>Fill in the form online and send it. You can also download it as a PDF, or print an empty form and fill it in on paper.</p>
+    <form id="signup" method="post" action="../inschrijven.php" novalidate>
+      <input type="hidden" name="taal" value="en">
+      <input type="hidden" name="pdf" value="">
+      <fieldset class="soort">
+        <legend>What are you signing up for?</legend>
+        <label class="opt"><input type="radio" name="soort" value="recreant" required><span><b>Recreational</b><small>Free play on Tuesday or Wednesday</small></span></label>
+        <label class="opt"><input type="radio" name="soort" value="competitie"><span><b>League</b><small>Playing in a league team</small></span></label>
+        <label class="opt"><input type="radio" name="soort" value="jeugd"><span><b>Youth</b><small>Youth training on Tuesday</small></span></label>
+      </fieldset>
+
+      <div class="fields" hidden>
+        <p class="ok" data-voor="jeugd"><b>Membership freeze:</b> the youth group is currently full. You can still sign up, and we will contact you when there is a place. Questions? Email <a href="mailto:jeugd@bvgaasperdam.nl">jeugd@bvgaasperdam.nl</a>.</p>
+
+        <div class="row2">
+          <label>First name<input name="voornaam" required autocomplete="given-name"></label>
+          <label>Last name<input name="achternaam" required autocomplete="family-name"></label>
+        </div>
+        <div class="row2">
+          <label>Date of birth<input name="geboortedatum" type="date" required autocomplete="bday"></label>
+          <fieldset class="inline" data-voor="recreant competitie"><legend>Gender</legend>
+            <label class="check"><input type="radio" name="geslacht" value="man" required> Male</label>
+            <label class="check"><input type="radio" name="geslacht" value="vrouw"> Female</label>
+          </fieldset>
+          <fieldset class="inline" data-voor="jeugd"><legend>Gender</legend>
+            <label class="check"><input type="radio" name="geslacht" value="jongen" required> Boy</label>
+            <label class="check"><input type="radio" name="geslacht" value="meisje"> Girl</label>
+          </fieldset>
+        </div>
+        <label>Street and house number<input name="adres" required autocomplete="street-address"></label>
+        <div class="row2">
+          <label>Postcode<input name="postcode" required autocomplete="postal-code"></label>
+          <label>Town<input name="woonplaats" required autocomplete="address-level2"></label>
+        </div>
+        <div class="row2">
+          <label>Email<input name="email" type="email" required autocomplete="email"></label>
+          <label>Phone<input name="telefoon" type="tel" required autocomplete="tel"></label>
+        </div>
+        <label data-voor="jeugd">Phone number of parent or guardian<input name="telefoon_ouder" type="tel" required></label>
+
+        <fieldset data-voor="recreant"><legend>Preferred evening</legend>
+          <label class="check"><input type="checkbox" name="speelavond[]" value="Dinsdag 19.30 - 21.30"> Tuesday 19:30–21:30</label>
+          <label class="check"><input type="checkbox" name="speelavond[]" value="Woensdag 19.00 - 21.00"> Wednesday 19:00–21:00</label>
+          <label class="check"><input type="checkbox" name="speelavond[]" value="Woensdag 21.00 - 23.00"> Wednesday 21:00–23:00</label>
+        </fieldset>
+
+        <div class="row2" data-voor="competitie">
+          <label>Which team
+            <select name="team" required>
+              <option value="">Choose…</option>
+              <option>BV Gaasperdam 1</option><option>BV Gaasperdam 2</option><option>BV Gaasperdam 3</option>
+              <option>BV Gaasperdam 4</option><option>BV Gaasperdam 5</option><option>BV Gaasperdam 6</option>
+              <option>BV Gaasperdam H1</option><option value="Invaller">Substitute</option>
+              <option value="Nog niet bekend">Not known yet</option>
+            </select>
+          </label>
+          <label>Playing evening<input name="speelavond_comp" placeholder="e.g. Tuesday and Thursday"></label>
+        </div>
+
+        <fieldset data-voor="jeugd"><legend>Fees</legend>
+          <label class="check"><input type="radio" name="betaling" value="iban" required> I pay myself (IBAN)</label>
+          <label class="check"><input type="radio" name="betaling" value="stadspas"> With the Stadspas</label>
+        </fieldset>
+        <label data-iban>IBAN<input name="iban" required autocomplete="off" placeholder="NL00 BANK 0123 4567 89" spellcheck="false"></label>
+        <label data-stadspas>Stadspas number (the last 8 digits)
+          <span class="prefix"><span>6064 3660 110</span><input name="stadspas" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" required autocomplete="off"></span>
+        </label>
+        <p class="muted" data-stadspas>If a parent has a Stadspas, we can collect the fees through it, as long as it is not already used for the fees of another club. You can sometimes also buy equipment with it (racket, shoes, sportswear). Want to know more? Email <a href="mailto:jeugd@bvgaasperdam.nl">jeugd@bvgaasperdam.nl</a>.</p>
+
+        <label><span data-voor="recreant competitie">Date of registration</span><span data-voor="jeugd">Membership start date</span><input name="datum" type="date" required></label>
+        <label>Comments (optional)<textarea name="opmerking" rows="3"></textarea></label>
+
+        <label data-voor="jeugd">Name of parent or guardian<input name="naam_ouder" required></label>
+        <label class="check"><input type="checkbox" name="akkoord" value="ja" required> <span><span data-voor="jeugd">As a parent or guardian, I declare that I</span><span data-voor="recreant competitie">I declare that I</span> agree to the articles of association, the house rules and the <a href="privacy.html">privacy statement</a> of BV Gaasperdam. In particular, I know the rules for cancelling: at least one month before the half-yearly fee collection (always in April and October), by sending an email to ledenadministratie@bvgaasperdam.nl.</span></label>
+
+        <div class="sign">
+          <span class="sign-label"><span data-voor="recreant competitie">Signature</span><span data-voor="jeugd">Signature of parent or guardian</span> <small>(draw with your mouse or finger)</small></span>
+          <canvas id="sign-pad" width="560" height="160" aria-label="Signature box"></canvas>
+          <button type="button" class="link-btn" id="sign-clear">Clear signature</button>
+        </div>
+
+        <label class="hp" aria-hidden="true">Leave this field empty<input name="website" tabindex="-1" autocomplete="off"></label>
+        <p class="err" id="signup-err" role="alert" hidden></p>
+        <div class="btns">
+          <button class="btn dark" type="submit">Send registration</button>
+          <button class="btn outline" type="button" id="pdf-btn">Download as PDF</button>
+        </div>
+      </div>
+      <p class="muted"><button type="button" class="link-btn" id="blank-btn">Prefer paper? Print an empty form (PDF).</button></p>
+      <div id="signup-done" class="ok" hidden>
+        <p><b>Thank you, your registration has been sent!</b> The membership administration will contact you as soon as possible.</p>
+        <button class="btn outline" type="button" id="pdf-done">Download your form as PDF</button>
+      </div>
+      <div id="signup-demo" class="ok" hidden>This is the test version of the website, nothing has been sent. You can still download the form as a PDF.</div>
+    </form>
+  </div>
 </section>
 </main>
 
