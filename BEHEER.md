@@ -24,6 +24,7 @@ De site bestaat uit gewone HTML-bestanden, zonder WordPress en zonder database. 
 | `inschrijven.php` | Mailt het inschrijfformulier met de PDF als bijlage naar de ledenadministratie (werkt alleen op de webhosting) |
 | `assets/inschrijven.js` | Het inschrijfformulier: velden per soort (recreant, competitie, jeugd), handtekening, PDF maken en versturen |
 | `assets/jspdf.umd.min.js` | Bibliotheek die de PDF maakt (jsPDF 2.5.1, MIT-licentie). Niet aanpassen. |
+| `docs/` | Statuten en huishoudelijk reglement (PDF), gelinkt vanaf `vereniging.html` en het inschrijfformulier |
 | `assets/style.css` | Kleuren, lettertypes en opmaak van de hele site. Verhoog na een wijziging het nummer in `style.css?v=…` op alle pagina's, anders zien bezoekers de oude opmaak uit hun browsergeheugen. |
 | `assets/site.js` | Het menu op de telefoon |
 
