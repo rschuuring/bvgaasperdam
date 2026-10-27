@@ -15,7 +15,7 @@
 <link rel="alternate" hreflang="en" href="en/lid-worden.html">
 <script src="assets/site.js?v=4" defer></script>
 <script src="assets/jspdf.umd.min.js" defer></script>
-<script src="assets/inschrijven.js?v=3" defer></script>
+<script src="assets/inschrijven.js?v=4" defer></script>
 </head>
 <body>
 <a class="skip" href="#inhoud">Naar de inhoud</a>
@@ -104,7 +104,7 @@
           <label>Woonplaats<input name="woonplaats" required autocomplete="address-level2"></label>
         </div>
         <div class="row2">
-          <label>E-mail<input name="email" type="email" required autocomplete="email"></label>
+          <label>E-mail<input name="email" type="email" required autocomplete="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]{2,}" title="Vul een geldig e-mailadres in, bijvoorbeeld naam@voorbeeld.nl"></label>
           <label>Telefoon<input name="telefoon" type="tel" required autocomplete="tel"></label>
         </div>
         <label data-voor="jeugd">Telefoonnummer ouder of verzorger<input name="telefoon_ouder" type="tel" required></label>
