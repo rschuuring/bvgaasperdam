@@ -285,8 +285,12 @@
       const antwoord = await fetch(form.action, {
         method: "POST", body: new FormData(form), headers: { "X-Requested-With": "fetch" }
       });
-      const json = await antwoord.json().catch(() => ({}));
-      if (!antwoord.ok || !json.ok) throw new Error(json.fout || antwoord.status);
+      const ruw = await antwoord.text();
+      let json = {};
+      try { json = JSON.parse(ruw); } catch (x) { /* geen JSON: de hosting gaf een foutpagina of PHP-melding */ }
+      if (!antwoord.ok || !json.ok) {
+        throw new Error(`${antwoord.status} ${json.fout || ruw.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().slice(0, 120)}`);
+      }
       fields.hidden = true;
       form.querySelector(".soort").hidden = true;
       document.getElementById("blank-btn").parentElement.hidden = true;
@@ -294,7 +298,8 @@
       document.getElementById("signup-done").scrollIntoView({ block: "center", behavior: "smooth" });
     } catch (ex) {
       fout(tekst("Het versturen is niet gelukt. Download het formulier als PDF en mail het naar ledenadministratie@bvgaasperdam.nl.",
-                 "Sending failed. Please download the form as a PDF and email it to ledenadministratie@bvgaasperdam.nl."));
+                 "Sending failed. Please download the form as a PDF and email it to ledenadministratie@bvgaasperdam.nl.") +
+        ` (${tekst("foutcode", "error code")}: ${ex.message})`);
     } finally {
       knop.disabled = false;
     }
