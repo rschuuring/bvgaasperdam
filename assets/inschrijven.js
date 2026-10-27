@@ -120,13 +120,13 @@
   // leeg = true geeft een leeg formulier om te printen en met de hand in te vullen.
   async function maakPdf(s, leeg) {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ unit: "mm", format: "a4" });
+    const doc = new jsPDF({ unit: "mm", format: "a4", compress: true });
     const v = naam => (leeg ? "" : waarde(naam));
     const L = 20, X = 75, R = 190;
     let y = 22;
 
     const img = await logo();
-    if (img) doc.addImage(img, "PNG", R - 24, 12, 24, 24);
+    if (img) doc.addImage(img, "PNG", R - 24, 12, 24, 24, "logo", "FAST");
     doc.setFont("helvetica", "bold"); doc.setFontSize(19); doc.setTextColor(19, 97, 83);
     doc.text(`Inschrijfformulier ${TITELS[s]}`, L, y);
     doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(80);
@@ -229,7 +229,7 @@
     if (s === "jeugd") regel("Naam ouder/verzorger", v("naam_ouder"));
     regel("Datum", leeg ? "" : datumNL(iso(new Date())));
     label(s === "jeugd" ? "Handtekening ouder/verzorger" : "Handtekening lid");
-    if (!leeg && getekend) doc.addImage(pad.toDataURL("image/png"), "PNG", X, y - 9, 56, 16);
+    if (!leeg && getekend) doc.addImage(pad.toDataURL("image/png"), "PNG", X, y - 9, 56, 16, undefined, "FAST");
     else { y += 12; lijn(X, X + 70); }
     y += 14;
 
@@ -269,6 +269,13 @@
   });
 
   // ---------- Versturen ----------
+  // De PDF gaat mee als bestand (niet als tekstveld): dat houdt het verzoek klein genoeg voor de hosting.
+  function gegevens(doc) {
+    const fd = new FormData(form);
+    fd.delete("pdf");
+    fd.append("pdf", doc.output("blob"), "inschrijving.pdf");
+    return fd;
+  }
   form.addEventListener("submit", async e => {
     e.preventDefault();
     if (fields.querySelector("#signup-err") === null) fields.querySelector(".btns").before(err);
@@ -277,13 +284,12 @@
     knop.disabled = true;
     try {
       const doc = await maakPdf(soort(), false);
-      form.elements.pdf.value = doc.output("datauristring").split(",")[1];
       if (testversie) {
         document.getElementById("signup-demo").hidden = false;
         return;
       }
       const antwoord = await fetch(form.action, {
-        method: "POST", body: new FormData(form), headers: { "X-Requested-With": "fetch" }
+        method: "POST", body: gegevens(doc), headers: { "X-Requested-With": "fetch" }
       });
       const ruw = await antwoord.text();
       let json = {};

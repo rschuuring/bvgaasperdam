@@ -32,6 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// Te groot verzoek: PHP gooit dan alle velden weg.
+if (empty($_POST) && (int)($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) klaar(false, 'te groot');
+
 // Spam-val: dit veld is onzichtbaar, mensen laten het leeg.
 if (!empty($_POST['website'])) klaar(true);
 
@@ -43,7 +46,7 @@ function veld($naam) {
 
 $soorten = ['recreant' => 'Recreant', 'competitie' => 'Competitie', 'jeugd' => 'Jeugd'];
 $soort = veld('soort');
-if (!isset($soorten[$soort])) klaar(false, 'velden');
+if (!isset($soorten[$soort])) klaar(false, 'veld soort');
 
 // Velden per soort, in de volgorde van het papieren formulier: veldnaam => [omschrijving, verplicht].
 $velden = [
@@ -74,7 +77,7 @@ $velden['datum'] = [$soort === 'jeugd' ? 'Datum lidmaatschap' : 'Datum van insch
 $regels = [];
 foreach ($velden as $naam => [$omschrijving, $verplicht]) {
     $waarde = veld($naam);
-    if ($verplicht && $waarde === '') klaar(false, 'velden');
+    if ($verplicht && $waarde === '') klaar(false, "veld $naam");
     if ($naam === 'betaling') $waarde = $waarde === 'stadspas' ? 'via de Stadspas' : 'betaalt zelf (IBAN)';
     if ($naam === 'stadspas') $waarde = '6064 3660 110 ' . $waarde;
     if ($naam === 'iban') $waarde = strtoupper(str_replace(' ', '', $waarde));
@@ -82,7 +85,8 @@ foreach ($velden as $naam => [$omschrijving, $verplicht]) {
     $regels[] = str_pad($omschrijving . ':', 28) . $waarde;
 }
 $email = filter_var(veld('email'), FILTER_VALIDATE_EMAIL);
-if (!$email || empty($_POST['akkoord'])) klaar(false, 'velden');
+if (!$email) klaar(false, 'veld email');
+if (empty($_POST['akkoord'])) klaar(false, 'veld akkoord');
 
 $opmerking = trim(mb_substr((string)($_POST['opmerking'] ?? ''), 0, 2000));
 $naam = veld('voornaam') . ' ' . veld('achternaam');
@@ -94,8 +98,13 @@ $tekst = "Nieuwe inschrijving via de website: " . $soorten[$soort] . "\n\n"
        . "Het ingevulde en ondertekende formulier zit als PDF in de bijlage.\n";
 
 // PDF uit het formulier controleren: moet echt een PDF zijn en niet te groot.
-$pdf = base64_decode((string)($_POST['pdf'] ?? ''), true);
-if ($pdf === false || substr($pdf, 0, 5) !== '%PDF-' || strlen($pdf) > 3 * 1024 * 1024) $pdf = '';
+$pdf = '';
+if (($_FILES['pdf']['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_OK && $_FILES['pdf']['size'] <= 3 * 1024 * 1024) {
+    $pdf = file_get_contents($_FILES['pdf']['tmp_name']);
+} elseif (!empty($_POST['pdf'])) {
+    $pdf = (string)base64_decode((string)$_POST['pdf'], true);
+}
+if (substr($pdf, 0, 5) !== '%PDF-' || strlen($pdf) > 3 * 1024 * 1024) $pdf = '';
 
 $onderwerp = '=?UTF-8?B?' . base64_encode("Inschrijving {$soorten[$soort]}: $naam") . '?=';
 $headers = "From: BV Gaasperdam website <$afzender>\r\n"
