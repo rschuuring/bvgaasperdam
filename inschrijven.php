@@ -84,8 +84,10 @@ foreach ($velden as $naam => [$omschrijving, $verplicht]) {
     if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $waarde, $d)) $waarde = "$d[3]-$d[2]-$d[1]";
     $regels[] = str_pad($omschrijving . ':', 28) . $waarde;
 }
-$email = filter_var(veld('email'), FILTER_VALIDATE_EMAIL);
-if (!$email) klaar(false, 'veld email');
+// Alleen een ruwe controle: de browser controleert het adres al. Reply-To alleen bij een geldig adres.
+$email = str_replace([' ', ',', ';', '<', '>'], '', veld('email'));
+if (strpos($email, '@') === false) klaar(false, 'veld email');
+$antwoordAan = filter_var($email, FILTER_VALIDATE_EMAIL) ? "Reply-To: $email\r\n" : '';
 if (empty($_POST['akkoord'])) klaar(false, 'veld akkoord');
 
 $opmerking = trim(mb_substr((string)($_POST['opmerking'] ?? ''), 0, 2000));
@@ -108,7 +110,7 @@ if (substr($pdf, 0, 5) !== '%PDF-' || strlen($pdf) > 3 * 1024 * 1024) $pdf = '';
 
 $onderwerp = '=?UTF-8?B?' . base64_encode("Inschrijving {$soorten[$soort]}: $naam") . '?=';
 $headers = "From: BV Gaasperdam website <$afzender>\r\n"
-         . "Reply-To: $email\r\n"
+         . $antwoordAan
          . "MIME-Version: 1.0\r\n";
 
 if ($pdf === '') {
