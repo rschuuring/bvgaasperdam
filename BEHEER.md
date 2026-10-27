@@ -46,15 +46,18 @@ Het menu, de kop en de voettekst staan op elke pagina. Pas je het menu aan, doe 
 - **Testversie:** GitHub Pages, vanuit deze repository. Elke wijziging op de `main`-branch staat binnen een paar minuten online.
 - **Echte site:** www.bvgaasperdam.nl, op de webhosting van de club. Daar draait nu (oktober 2026) nog de oude WordPress-site.
 
-Zolang dit een testversie is, staat op elke pagina `<meta name="robots" content="noindex, nofollow">` en blokkeert `robots.txt` zoekmachines. **Haal die regel en `robots.txt` weg wanneer de site live gaat op bvgaasperdam.nl.**
+In de repository staat op elke pagina `<meta name="robots" content="noindex, nofollow">` en blokkeert `robots.txt` zoekmachines, zodat de testversie niet in Google komt. `tools/maak_upload.py` haalt dat weg voor de echte site.
 
 ## Live zetten op de webhosting
 
-1. Maak een back-up van de oude WordPress-site via het hostingpaneel.
-2. Upload alle bestanden en mappen uit deze repository, ook `en/` en `assets/` (behalve `BEHEER.md` en `README.md`), naar de webmap van bvgaasperdam.nl, meestal `public_html`.
-3. Haal de noindex-regel en `robots.txt` weg (zie hierboven).
+De webhosting is bHosted (pakket met DirectAdmin). Inloggen op DirectAdmin gaat via het adres van de server (in oktober 2026 https://s13.servitnow.nl:2222) met de hostinglogin van het bestuur.
+
+1. Maak het uploadbestand: `python3 tools/maak_upload.py`. Dat maakt `bvgaasperdam-upload-<datum>.zip` zonder de testmodus (noindex en robots.txt), met een `.htaccess` die oude WordPress-adressen doorstuurt. BEHEER.md, README.md en `tools/` gaan niet mee.
+2. Eerste keer (oktober 2026): oude WordPress-bestanden uit `public_html` verplaatst naar `domains/bvgaasperdam.nl/oud-wordpress` (buiten de website), na een volledige backup via "Create/Restore Backups".
+3. Upload de zip in DirectAdmin > File Manager naar `public_html`, pak hem uit (Extract) en verwijder de zip. Bestaande bestanden worden overschreven.
 4. Test het inschrijfformulier één keer en controleer of de mail met de PDF-bijlage bij de ledenadministratie aankomt.
-5. Zet doorverwijzingen van oude WordPress-adressen (zoals `/teamindeling/` en `/contact-2/`) naar de nieuwe pagina's, zodat oude links en zoekresultaten blijven werken.
+
+Na een wijziging alleen de gewijzigde bestanden uploaden mag ook, maar let op: HTML-bestanden uit de repository bevatten de noindex-regel. Gebruik daarom altijd de zip uit stap 1.
 
 ## Afspraken en keuzes
 

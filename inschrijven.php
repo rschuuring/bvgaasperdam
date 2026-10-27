@@ -3,6 +3,11 @@
 // met de ingevulde gegevens in de mail en het formulier als PDF-bijlage.
 // Werkt alleen op de webhosting (PHP), niet op de testversie op GitHub Pages.
 
+// Voor het geval de hosting de mbstring-uitbreiding van PHP niet heeft.
+if (!function_exists('mb_substr')) {
+    function mb_substr($s, $start, $len) { return substr($s, $start, $len); }
+}
+
 $ontvanger = 'ledenadministratie@bvgaasperdam.nl';
 $afzender  = 'website@bvgaasperdam.nl';
 
