@@ -77,6 +77,14 @@ def live(html):
     return re.sub(r'[ \t]*<meta name="robots" content="noindex, nofollow">\n', "", html)
 
 
+def schrijf(z, naam, inhoud):
+    # Leesbaar voor de webserver (644); anders geeft de hosting "403 Forbidden".
+    info = zipfile.ZipInfo(naam, date_time=datetime.datetime.now().timetuple()[:6])
+    info.external_attr = 0o100644 << 16
+    info.compress_type = zipfile.ZIP_DEFLATED
+    z.writestr(info, inhoud)
+
+
 def main():
     uit = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else ".").resolve()
     bestanden = subprocess.run(["git", "ls-files"], cwd=REPO, capture_output=True, text=True, check=True).stdout.split()
@@ -90,11 +98,11 @@ def main():
                 tekst = live(pad.read_text(encoding="utf-8"))
                 if "noindex" in tekst and naam != "welcome.html":
                     sys.exit(f"noindex niet weggehaald in {naam}")
-                z.writestr(naam, tekst)
+                schrijf(z, naam, tekst)
             else:
-                z.write(pad, naam)
-        z.writestr("robots.txt", ROBOTS)
-        z.writestr(".htaccess", htaccess())
+                schrijf(z, naam, pad.read_bytes())
+        schrijf(z, "robots.txt", ROBOTS)
+        schrijf(z, ".htaccess", htaccess())
     print(zipnaam)
 
 
